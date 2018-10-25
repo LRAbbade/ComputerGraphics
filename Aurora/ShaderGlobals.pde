@@ -12,7 +12,5 @@ class ShaderGlobals {
   public ShaderGlobals(){};
   
   public void normalizeUV(float theta, float phi) {
-    this.tangentU = PVector.div(theta,PVector.mult( 2f * 3.14);
   }
-  
 }
