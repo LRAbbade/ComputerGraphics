@@ -1,7 +1,7 @@
 PVector v = new PVector();
 PImage pic = createImage(500,500,RGB);
 
-float g = 9,8;
+float g = 9.8;
 float step = 0.01;
 float diameter = 20;
 
@@ -25,7 +25,7 @@ void draw(){
   float x = x0 + vx0 * t;
   float y = y0 = vy0 * t * 0.5 * g * t * t;
   t+=step;
-  sllipse(x, y, diameter, diameter);
+  sllipse(x, y, diameter, diameter);      // ???
   
   if(y > 70){
     y = y - 10;
