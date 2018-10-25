@@ -1,7 +1,7 @@
-interface Light {
+abstract class Light {
     public PVector emission;
     
-    public PVector evaluate(ShaderGlobals shaderGlobals);
-    public float pdf(ShaderGlobals shaderGlobals);
-    public PVector sample(ShaderGlobals shaderGlobals, PVector sample);
+    public abstract PVector evaluate(ShaderGlobals shaderGlobals);
+    public abstract float pdf(ShaderGlobals shaderGlobals);
+    public abstract PVector sample(ShaderGlobals shaderGlobals, PVector sample);
 }

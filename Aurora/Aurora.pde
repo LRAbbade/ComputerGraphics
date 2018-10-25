@@ -15,7 +15,7 @@ float t = 0;
 
 void setup(){
   size(500,720);
-  pic.set(250,250,color(255,0,0));//8bits
+  pic.set(250,250,color(255,0,0)); //8bits
 }
 
 //loop
@@ -25,7 +25,7 @@ void draw(){
   float x = x0 + vx0 * t;
   float y = y0 = vy0 * t * 0.5 * g * t * t;
   t+=step;
-  sllipse(x, y, diameter, diameter);      // ???
+  ellipse(x, y, diameter, diameter);
   
   if(y > 70){
     y = y - 10;

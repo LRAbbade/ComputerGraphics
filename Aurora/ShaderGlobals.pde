@@ -10,7 +10,5 @@ class ShaderGlobals {
   public PVector lightNormal;
   
   public ShaderGlobals(){};
-  
-  public void normalizeUV(float theta, float phi) {
-  }
+
 }
