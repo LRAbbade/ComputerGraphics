@@ -3,5 +3,5 @@ interface Light {
     
     public PVector evaluate(ShaderGlobals shaderGlobals);
     public float pdf(ShaderGlobals shaderGlobals);
-    public PVector sample(ShaderGlobals shaderGlobals, PVector sample);   
+    public PVector sample(ShaderGlobals shaderGlobals, PVector sample);
 }

@@ -26,6 +26,7 @@ class Sphere implements Shape {
     @Override
     public float pdf(ShaderGlobals shaderglobals) {}
     
+    @Override
     public PVector sample(ShaderGlobals shaderglobals, PVector sample) {}
- 
+
 }
