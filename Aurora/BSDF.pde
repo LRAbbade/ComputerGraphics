@@ -1,18 +1,14 @@
-class BSDF{
-  public BSDF(){};
-  
-  public PVector evaluate(ShaderGlobals shaderGlobals){
-    PVector object;
-    return object;
+interface BSDF extends Shape {
+  public PVector evaluate(ShaderGlobals shaderGlobals) {
+      return new PVector();
   }
   
-  public float pdf(ShaderGlobals shaderGlobals){
-    float object;
-    return object;
+  public float pdf(ShaderGlobals shaderGlobals) {
+    return 0;
   }
   
-  public PVector sample(ShaderGlobals shaderGlobals, PVector sample){
-    PVector object;
-    return object;
+  public PVector sample(ShaderGlobals shaderGlobals, PVector sample) {
+    return new PVector();
   }
+
 }

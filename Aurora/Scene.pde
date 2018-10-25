@@ -1,9 +1,9 @@
-class Scene{
-  public Scene(){};
-  public Scene(ArrayList<Shape> shapes ){  
+class Scene {
+  public Scene() {};
+  public Scene(ArrayList<Shape> shapes ) {  
   }
   
-  public Intersection intersects(Ray ray){
+  public Intersection intersects(Ray ray) {
     Intersection intersection;
     
     //intersection.hit = false;
@@ -19,4 +19,5 @@ class Scene{
     //}
     return intersection;
   }
+  
 }
