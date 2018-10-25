@@ -4,7 +4,19 @@ class Scene{
   }
   
   public Intersection intersects(Ray ray){
-    Intersection object;
-    return object;
+    Intersection intersection;
+    
+    //intersection.hit = false;
+    //intersection.distance = Infinity;
+    //intersection.object = null;
+    
+    //for object in scene{
+    //  Intersection temp = object.intersects(ray);
+    //  if (temp.hit && temp.distance < intersection.distance){
+    //    intersection = temp
+    //    intersection.object = object
+    //  }
+    //}
+    return intersection;
   }
 }
