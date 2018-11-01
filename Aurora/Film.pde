@@ -10,7 +10,7 @@ class Film {
     }
 
     public float aspectRatio() {
-        // TODO
+        return width / height;
     }
 
 }
