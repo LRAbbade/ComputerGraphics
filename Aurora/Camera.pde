@@ -1,11 +1,13 @@
 class Camera {
     public float fieldOfView;
+    public Film film;
     public PMatrix3D worldMatrix;
 
     public Camera() {}
 
     public Camera(float fieldOfView, Film film, PMatrix3D worldMatrix) {
         this.fieldOfView = fieldOfView;
+        this.film = film;
         this.worldMatrix = worldMatrix;
     }
 
@@ -23,11 +25,20 @@ class Camera {
     }
 
     public void transform(PMatrix3D transformation) {
-        // TODO
+        worldMatrix.apply(transformation);
     }
 
     public Ray generateRay(float x, float y, PVector sample) {
-        // TODO
+        float xc = film.aspectRatio() * (fieldOfView / 2) * x;
+        float yc = (fieldOfView / 2) * y;
+
+        PVector p = new PVector(xc, yc, -1);    
+        PVector pl = new PVector(1, 1, 1);
+        pl = worldMatrix.mult(p, pl); 
+
+        PVector d = PVector.sub(pl, sample).normalize();
+
+        return new Ray(p, d);
     }
 
 }
