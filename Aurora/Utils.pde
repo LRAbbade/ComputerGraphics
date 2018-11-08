@@ -31,20 +31,20 @@ class Utils {
         return gaussian1D(sample.x, width) * gaussian1D(sample.y, width);
     }
 
-    public static PVector saturate(PVector color) {
-        return new PVector(constrain(color.x, 0, 1.0), 
-                           constrain(color.y, 0, 1.0), 
-                           constrain(color.z, 0, 1.0));
+    public static PVector saturate(PVector colour) {
+        return new PVector(constrain(colour.x, 0, 1.0), 
+                           constrain(colour.y, 0, 1.0), 
+                           constrain(colour.z, 0, 1.0));
     }
 
-    public static PVector gamma(PVector color, float value) {
+    public static PVector gamma(PVector colour, float value) {
         float t = 1.0/value;
-        return new PVector(pow(color.x, t), pow(color.y, t), pow(color.z, t));
+        return new PVector(pow(colour.x, t), pow(colour.y, t), pow(colour.z, t));
     }
 
-    public static PVector exposure(PVector color, float value) {
+    public static PVector exposure(PVector colour, float value) {
         float t = pow(2.0, value);
-        return new PVector(color.x * t, color.y * t, color.z * t);
+        return new PVector(colour.x * t, colour.y * t, colour.z * t);
     }
 
 }
