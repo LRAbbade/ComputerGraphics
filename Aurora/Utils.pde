@@ -1,9 +1,9 @@
-import java.utils.random;
-
 class Utils {
+  
+    public Utils() {}
 
-    public static PVector[] stratifiedSample(int samples) {
-        int size = sqrt(samples);
+    public PVector[] stratifiedSample(int samples) {
+        int size = (int)sqrt(samples);
         PVector[] points = new PVector[samples];
 
         for (int i = 0; i < size; i++) {
@@ -17,32 +17,35 @@ class Utils {
         return points;
     }
 
-    private PVector uniformRandom2D() {
-        Random random = new Random();
-        return new PVector(random.nextFloat() - 0.5, random.nextFloat() - 0.5, 0);
+    public float uniformRandom1D() {
+        return random(1.0);
     }
 
-    public static float gaussian1D(float sample, float width) {
+    public PVector uniformRandom2D() {
+        return new PVector(uniformRandom1D(), uniformRandom1D());
+    }
+
+    public float gaussian1D(float sample, float width) {
         float radius = width * 0.5;
         return max(0, exp(-sample * sample) - exp(-radius * radius));
     }
 
-    public static float gaussian2D(PVector sample, float width) {
+    public float gaussian2D(PVector sample, float width) {
         return gaussian1D(sample.x, width) * gaussian1D(sample.y, width);
     }
 
-    public static PVector saturate(PVector colour) {
+    public PVector saturate(PVector colour) {
         return new PVector(constrain(colour.x, 0, 1.0), 
                            constrain(colour.y, 0, 1.0), 
                            constrain(colour.z, 0, 1.0));
     }
 
-    public static PVector gamma(PVector colour, float value) {
+    public PVector gamma(PVector colour, float value) {
         float t = 1.0/value;
         return new PVector(pow(colour.x, t), pow(colour.y, t), pow(colour.z, t));
     }
 
-    public static PVector exposure(PVector colour, float value) {
+    public PVector exposure(PVector colour, float value) {
         float t = pow(2.0, value);
         return new PVector(colour.x * t, colour.y * t, colour.z * t);
     }
