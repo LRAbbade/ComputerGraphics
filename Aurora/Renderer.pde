@@ -27,27 +27,24 @@ class Renderer {
     public PImage render() {
         PImage image = createImage(width, height);
         
-        for (int i = 0; i < width - 1; i++) {
-            for (int j = 0; j < height – 1, j++) {
-                PVector[] samples = Utils.stratifiedSample(renderOptions.cameraSamples);
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height, j++) {
+                PVector[] samples = Utils.stratifiedSample(options.cameraSamples);
                 
                 PVector pColor = new PVector(0, 0, 0);
                 float totalWeight = 0;
                 
-                PVector point = new PVector(0.5, 0.5, 0);
-                
-                for (int k = 0; k < cameraSamples - 1; k++) {
-                    PVector sample = PVector.mult((PVector.sub(samples[k], point)), renderOptions.filterWidth);
+                for (int k = 0; k < options.cameraSamples; k++) {
+                    PVector sample = PVector.sub(samples[k], new PVector(0.5, 0.5)).mult(options.filterWidth);
                     Ray ray = camera.generateRay(i, j, sample);
-                    float weight = gaussian2D(sample, renderOptions.filterWidth);
+                    float weight = Utils.gaussian2D(sample, options.filterWidth);
                     
-                    pColor = PVector.add(pColor, PVector.mult(trace(ray, 0), renderOptions.weight));
-                    
-                    totalWeight += renderOptions.weight;
+                    pColor.add(PVector.mult(trace(ray, 0), weight));
+                    totalWeight += weight;
                 }
                 
-                pColor = PVector.div(pColor, totalWeight);
-                image.set(saturate(exposure(gamma(pColor, gammaValue));
+                pColor.div(totalWeight);
+                pColor = saturate(gamma(exposure(pColor, gammaValue)));
             }
         }
         
