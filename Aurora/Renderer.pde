@@ -44,7 +44,9 @@ class Renderer {
                 }
                 
                 pColor.div(totalWeight);
-                pColor = saturate(gamma(exposure(pColor, gammaValue)));
+                pColor = Utils.saturate(Utils.gamma(Utils.exposure(pColor, options.exposure), options.gamma)).mult(255.0);
+
+                image.set(i, j, color(pColor.x, pColor.y, pColor.z));
             }
         }
         
