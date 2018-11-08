@@ -1,5 +1,3 @@
-import java.utils.random;
-
 class Utils {
 
     public static PVector[] stratifiedSample(int samples) {
@@ -17,9 +15,12 @@ class Utils {
         return points;
     }
 
+    private float uniformRandom1D() {
+        return random(1.0);
+    }
+
     private PVector uniformRandom2D() {
-        Random random = new Random();
-        return new PVector(random.nextFloat() - 0.5, random.nextFloat() - 0.5, 0);
+        return new PVector(uniformRandom1D(), uniformRandom1D());
     }
 
     public static float gaussian1D(float sample, float width) {
