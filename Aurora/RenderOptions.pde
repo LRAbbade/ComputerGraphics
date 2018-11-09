@@ -5,14 +5,14 @@ class RenderOptions {
     public int cameraSamples;
     public int lightSamples;
     public int diffuseSamples;
-    public int filterWidth;
+    public float filterWidth;
     public float gamma;
     public float exposure;
 
     public RenderOptions(){}
 
     public RenderOptions(int width, int height, int maximumDepth, int cameraSamples,
-                         int lightSamples, int diffuseSamples, int filterWidth,
+                         int lightSamples, int diffuseSamples, float filterWidth,
                          float gamma, float exposure) {
         this.width = width;
         this.height = height;

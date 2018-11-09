@@ -15,10 +15,12 @@ class Renderer {
 
     public PVector computeDirectIllumination(BSDF bsdf, ShaderGlobals shaderGlobals) {
         // TODO
+        return new PVector();
     }
 
     public PVector computeIndirectIllumination(BSDF bsdf, ShaderGlobals shaderGlobals) {
         // TODO
+        return new PVector();
     }
 
     public PVector trace(Ray ray, int depth) {
@@ -30,7 +32,7 @@ class Renderer {
         PImage image = createImage(width, height, RGB);
         
         for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height, j++) {
+            for (int j = 0; j < height; j++) {
                 PVector[] samples = utils.stratifiedSample(options.cameraSamples);
                 
                 PVector pColor = new PVector(0, 0, 0);
