@@ -37,10 +37,9 @@ class Camera {
         
         worldMatrix.mult(pixel, pixel);
         
-        return new Ray(
-            new PVector(worldMatrix.m03, worldMatrix.m13, worldMatrix.m23),
-            PVector.sub(pixel, origin).normalize()
-        );
+        PVector origin = new PVector(worldMatrix.m03, worldMatrix.m13, worldMatrix.m23);
+        
+        return new Ray(origin, PVector.sub(pixel, origin).normalize());
     }
 
 }

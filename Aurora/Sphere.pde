@@ -14,9 +14,12 @@ class Sphere extends Shape {
     @Override
     public Intersection intersects(Ray ray) {
        float a = 1;
-       PVector o_menos_c = ray.origin.sub(position);
-       float b = ray.direction.mult(2).cross(o_menos_c).mag();
-       float c = (o_menos_c.mag() * o_menos_c.mag()) - (radius * radius);
+       PVector o_menos_c = PVector.sub(ray.origin, position);
+       float b = PVector.mult(ray.direction, 2).dot(o_menos_c);
+       float c = o_menos_c.magSq() - (radius * radius);
+       
+       print("b = " + b + "\n");
+       print("c = " + c + "\n");
        
        float[] raizes;
        
@@ -28,14 +31,14 @@ class Sphere extends Shape {
        
        float t0 = raizes[0];
        float t1 = raizes[1];
+       print("t0 = " + t0 + "\n");
+       print("t1 = " + t1 + "\n");
+       int inf = (1<<30);
        
-       PVector r0 = ray.intersectionPoint(t0);
-       PVector r1 = ray.intersectionPoint(t1);
-       
-       float dist1 = r0.sub(ray.origin).mag();
-       float dist2 = r1.sub(ray.origin).mag();
-       
-       return new Intersection(true, Math.min(dist1, dist2), 0);    // nao sei q q eh o index
+       float t = Math.min(t0 >= 0 ? t0 : inf, t1 >= 0 ? t1 : inf);
+       if (t == inf) return new Intersection(false, 0, 0); 
+
+       return new Intersection(true, t, -1);
     }
     
     private float getDelta(float a, float b, float c) {
