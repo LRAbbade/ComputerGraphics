@@ -13,54 +13,51 @@ class Sphere extends Shape {
     
     @Override
     public Intersection intersects(Ray ray) {
-       float a = 1;
-       PVector o_menos_c = PVector.sub(ray.origin, position);
-       float b = PVector.mult(ray.direction, 2).dot(o_menos_c);
-       float c = o_menos_c.magSq() - (radius * radius);
-       
-       print("b = " + b + "\n");
-       print("c = " + c + "\n");
-       
-       float[] raizes;
-       
-       try {
-           raizes = bhaskara(a, b, c);
-       } catch (Exception e) {
-           return new Intersection(false, 0, 0);
-       }
-       
-       float t0 = raizes[0];
-       float t1 = raizes[1];
-       print("t0 = " + t0 + "\n");
-       print("t1 = " + t1 + "\n");
-       int inf = (1<<30);
-       
-       float t = Math.min(t0 >= 0 ? t0 : inf, t1 >= 0 ? t1 : inf);
-       if (t == inf) return new Intersection(false, 0, 0); 
-
-       return new Intersection(true, t, -1);
+        PVector d = PVector.sub(position, ray.origin);
+        float t = d.dot(ray.direction);
+        
+        if (t < 0)
+            return new Intersection();
+        
+        float d2 = d.dot(d) - t * t;
+        float r2 = radius * radius;
+        
+        if (d2 > r2)
+            return new Intersection();
+        
+        float dt = sqrt(r2 - d2);
+        
+        return new Intersection(true, t - dt, -1);
     }
     
-    private float getDelta(float a, float b, float c) {
-        return b*b - 4*a*c;
-    }
-    
-    private float[] bhaskara(float a, float b, float c) {
-        float delta = getDelta(a, b, c);
-        float x1 = (float)(-b + Math.sqrt(delta))/2*a;
-        float x2 = (float)(-b - Math.sqrt(delta))/2*a;
-        float[] r = {x1, x2};
-        return r;
-    }
-
     @Override
     public ShaderGlobals calculateShaderGlobals(Ray ray, Intersection intersection) {
-        return new ShaderGlobals();
+        PVector point = ray.intersectionPoint(intersection.distance);
+        PVector normal = PVector.sub(point, position).normalize();
+        
+        float theta = atan2(normal.x, normal.z);
+        float phi = acos(normal.y);
+        
+        Utils utils = new Utils();
+        
+        PVector uv = new PVector((theta * utils.INVERSE_PI + 1.0) * 0.5, phi * utils.INVERSE_PI);
+        
+        float st = sin(theta);
+        float sp = sin(phi);
+        float ct = cos(theta);
+        float cp = cos(phi);
+        
+        PVector tangentU = new PVector(ct, 0, -st);
+        PVector tangentV = new PVector(st * cp, -sp, ct * cp);
+        
+        PVector viewDirection = PVector.mult(ray.direction, -1.0);
+        
+        return new ShaderGlobals(point, normal, uv, tangentU, tangentV, viewDirection, null, null, null);
     }
-
+    
     @Override
     public float surfaceArea() {
-        return 0;
+        return 4.0 * PI * radius * radius;
     }
 
     @Override

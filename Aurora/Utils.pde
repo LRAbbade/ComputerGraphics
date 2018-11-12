@@ -1,4 +1,5 @@
 class Utils {
+    public final float INVERSE_PI = 1.0/PI;
   
     public Utils() {}
 
